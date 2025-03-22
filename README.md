@@ -5,7 +5,8 @@ This project involves a comprehensive analysis of Netflix's movies and TV shows 
 ## Objectives
 Data Source: The data for this project is sourced from the Kaggle Netflix dataset.
 
-## Database Creation: A Postgre database named Netflix is created to store the data.
+## Database Creation
+A Postgre database named Netflix is created to store the data.
 
 ### **Data Analysis**
 SQL queries are used to analyze the distribution of movies vs TV shows, identify top countries contributing to Netflix content, and explore trends in content additions.
