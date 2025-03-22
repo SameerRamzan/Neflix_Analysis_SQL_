@@ -14,18 +14,19 @@
 -- 	description VARCHAR(250)
 -- );
 -- ------------
-```
-'''Select * From netflix;
-Select COUNT(*) total From netflix;'''
-```
+
+
+Select * From netflix;
+Select COUNT(*) total From netflix;
+
 --------------
-```
+
 Select 
 	DISTINCT(type)
 From netflix;
-```
+
 ---------------
-```
+
 --Count the movies and TV shows
 Select
 	type,
@@ -33,9 +34,9 @@ Select
 From netflix
 Group By type;
 --"Movie"	6131, "TV Show"	2676
-```
+
 -----------
-```
+
 --find the most common ratings for movies and tv-shows
 select 
 	type,
@@ -53,9 +54,9 @@ From
 where ranking=1 OR ranking=2 OR ranking=3;
 
 --"Movie"	"TV-MA"	2062, "TV Show"	"TV-MA"	1145
-```
+
 -----------------
-```
+
 --list all movies released in a specific year
 
 Select 
@@ -73,9 +74,9 @@ Select
 From netflix
 Where type='Movie' AND release_year=2020
 Limit 5;
-```
+
 ---------------------------
-```
+
 --top 5 countries with the most content on netflix
 Select
 	TRIM(UNNEST(STRING_TO_ARRAY(country, ','))) as new_country,
@@ -84,9 +85,9 @@ From netflix
 group by 1
 order by 2 desc
 limit 5;
-```
+
 ----------------
-```
+
 -- find the longest movie
 
 select 
@@ -96,35 +97,35 @@ WHERE
 	type='Movie' 
 	AND 
 	duration=(select MAX(duration) FROM netflix);
-```
+
 -------------------
-```
+
 --find content added in the last five years
 Select
 	*,
 	TO_DATE(date_added, 'Month DD, YYYY')
 From netflix
 where TO_DATE(date_added, 'Month DD, YYYY')  > CURRENT_DATE - INTERVAL '5 Years'
-```
+
 ----------------------------
-```
+
 --find all the movies by director "Rajiv Chilaka"
 SELECT
 	*
 FROM netflix
 WHERE director ILIKE '%Rajiv Chilaka%'
-```
+
 -------------------
-```
+
 -- list all tv-shows with more than 5 seasons
 
 SELECT 
 	*
 FROM netflix
 WHERE type= 'TV Show' AND SPLIT_PART(duration, ' ', 1)::numeric > 5;
-```
+
 ----------------------
-```
+
 --count the number of content in each genre.
 Select 
 	TRIM(UNNEST(STRING_TO_ARRAY(listed_in, ','))),
@@ -132,9 +133,9 @@ Select
 From netflix
 Group By 1
 Order By 2 Desc
-```
+
 --------------------
-```
+
 --find the average number of content released by india on netflix
 Select 
 	EXTRACT(YEAR FROM TO_DATE(date_added, 'Month DD, YYYY')) as Year,
@@ -144,9 +145,9 @@ from netflix
 Where country='India'
 Group BY 1
 Order By 2 Desc
-```
+
 ----------------------
-```
+
 --find the top 10 actors who have appeared in movies mostly
 Select 
 	TRIM(UNNEST(STRING_TO_ARRAY(casts, ','))) as actors,
@@ -155,9 +156,9 @@ From netflix
 Group By 1
 Order By 2 DESC
 LIMIT 10;
-```
+
 ---------------------
-```
+
 --Categorize the content based on the keywords 'kill' and 'violence' in the description. 
 --Label content containing these keywords as bad and good label for the rest of the content.
 With new_table AS (
@@ -175,4 +176,4 @@ Select
 	Count(*)
 From new_table
 Group BY 1
-```
+
